@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC   
+    "-//mybatis.org//DTD Mapper 3.0//EN"  
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dao.ScoreDao">
+	<select id="search" resultMap="searchScMap">
+		SELECT * from v_emp_sc where s_id
+		= #{id}
+	</select>
+
+	<insert id="add">
+		insert into score(e_id,p_id,value)
+		values(#{emp.id},#{pro.id},#{value})
+	</insert>
+	<select id="returnNewId" resultType="java.lang.Integer">
+		select last_insert_id()
+	</select>
+
+	<update id="update">
+		update score set value = #{value} where id = #{id}
+	</update>
+
+	<select id="searchCount" resultType="java.lang.Integer">
+		SELECT count(*) from v_emp_sc where 1=1
+		<if test="emp != null and emp.name != null and emp.name != ''"> and e_name=#{emp.name}</if>
+		<if test="emp != null and emp.dep != null and emp.dep.id != -1"> and p_id=#{emp.dep.id}</if>
+		<if test="pro != null and pro.id != -1"> and p_id=#{pro.id}</if>
+		<if test="grade != null and grade != ''"> and grade=#{grade}</if>
+	</select>
+
+	<select id="searchByCondition" resultMap="searchScMap">
+		SELECT sc.*,concat(e_id,p_id) as ep from v_emp_sc as sc where 1=1
+		<if
+			test="sc.emp != null and sc.emp.name != null and sc.emp.name != ''"> and sc.e_name=#{sc.emp.name}</if>
+		<if
+			test="sc.emp != null and sc.emp.dep != null and sc.emp.dep.id != -1"> and sc.p_id=#{sc.emp.dep.id}</if>
+		<if test="sc.pro != null and sc.pro.id != -1"> and sc.p_id=#{sc.pro.id}</if>
+		<if test="sc.grade != null and sc.grade != ''"> and sc.grade=#{sc.grade}</if>
+		LIMIT #{begin} ,#{end}
+	</select>
+
+	<resultMap id="searchScMap" type="sc">
+		<id property="tId" column="ep" />
+		<result property="id" column="s_id" />
+		<result property="value" column="value" />
+		<result property="grade" column="grade" />
+
+		<association property="emp" javaType="emp" column="e_id">
+			<id property="id" column="e_id" />
+			<result property="name" column="e_name" />
+			<association property="dep" javaType="dep" column="d_id">
+				<id property="id" column="d_id" />
+				<result property="name" column="d_name" />
+			</association>
+		</association>
+
+		<association property="pro" javaType="pro" column="p_id">
+			<id property="id" column="p_id" />
+			<result property="name" column="p_name" />
+		</association>
+	</resultMap>
+
+	<!-- <resultMap id="searchScMap" type="sc" autoMapping="true"> <id property="id" 
+		column="s_id" /> <result property="value" column="value" /> <result property="grade" 
+		column="grade" /> <collection property="emp" ofType="emp" javaType="emp" 
+		column="e_id" select="selectEmp"/> <collection property="pro" ofType="pro" 
+		javaType="pro" column="p_id" select="selectPro"/> </resultMap> <select id="selectEmp" 
+		resultMap="searchEmpMap"> SELECT * from employee where id = #{e_id} </select> 
+		<resultMap id="searchEmpMap" type="emp" autoMapping="true"> <id property="id" 
+		column="id" /> <result property="name" column="name" /> <collection property="dep" 
+		ofType="dep" javaType="dep" column="d_id" select="selectDep"/> </resultMap> 
+		<select id="selectDep" resultType="dep"> select * from department where id 
+		=#{d_id} </select> <select id="selectPro" resultType="pro"> select * from 
+		project where id =#{p_id} </select> -->
+
+</mapper> 
+    

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC   
+    "-//mybatis.org//DTD Mapper 3.0//EN"  
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dao.Dep2ProDao">
+	<select id="searchByDepartment" resultType="pro">
+		<choose>
+			<when test="d_id != null and d_id != -1">
+				SELECT p_id as id,p_name as name from v_dep_pro where d_id = #{d_id}
+			</when>
+			<otherwise>
+				SELECT * from project
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="searchByNotDepartment" resultType="pro">
+		SELECT * from project where id not in (SELECT p_id from v_dep_pro where d_id = #{d_id})
+	</select>
+	
+	<insert id="add">
+		INSERT into r_dep_pro(d_id,p_id) values
+		<foreach collection="p_id" item="item" separator=",">
+			(#{d_id},#{item})
+		</foreach>
+	</insert>
+	
+	<update id="del">
+		delete from r_dep_pro where d_id = #{d_id} and p_id in
+		<foreach collection="p_id" item="item" separator="," open="(" close=")">
+            #{item}
+        </foreach>
+	</update>
+</mapper> 
+    
