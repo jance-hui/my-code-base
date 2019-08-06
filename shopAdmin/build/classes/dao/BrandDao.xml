@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC   
+    "-//mybatis.org//DTD Mapper 3.0//EN"  
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dao.BrandDao">
+	<select id="search" resultType="entity.Brand">select * from g_brand</select>
+	
+	<select id="search2" resultType="entity.Brand">select * from g_brand where id in(${_parameter})</select>
+	
+	<insert id="add">INSERT into g_brand(name)values(#{name})</insert>
+	
+	<update id="del">delete from g_brand where id in(${_parameter})</update>
+	
+	<update id="update">update g_brand set name=#{name} where id=#{id}</update>
+	
+	<select id="searchByID" resultType="entity.Brand">select * from g_brand where id=#{id}</select>
+</mapper> 
+    

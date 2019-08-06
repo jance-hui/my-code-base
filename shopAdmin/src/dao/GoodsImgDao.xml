@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC   
+    "-//mybatis.org//DTD Mapper 3.0//EN"  
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dao.GoodsImgDao">
+	<select id="search" resultMap="searchImg">
+		select g.*,gi.id as giID,gi.name as giName,gi.sort as giSort
+		from goodsImg as gi LEFT JOIN goods as g
+		on gi.goodsID = g.id
+		where sort = 0
+	</select>
+	
+	<select id="searchByID" resultMap="searchImg">
+		select g.*,gi.id as giID,gi.name as giName,gi.sort as giSort
+		from goodsImg as gi LEFT JOIN goods as g
+		on gi.goodsID = g.id 
+		where sort = 0 and goodsID=#{id}
+	</select>
+	
+	<select id="searchByIDs" resultMap="searchImg">
+		select g.*,gi.id as giID,gi.name as giName,gi.sort as giSort
+		from goodsImg as gi LEFT JOIN goods as g
+		on gi.goodsID = g.id
+		where sort = 0 and goodsID in(${_parameter})
+	</select>
+
+	<select id="searchByGoods" resultMap="searchImg">
+		select g.*,gi.id as giID,gi.name as giName,gi.sort as giSort
+		from goodsImg as gi LEFT JOIN goods as g
+		on gi.goodsID = g.id
+		where goodsID=#{gID} and sort!=0
+	</select>
+	
+	<resultMap type="entity.GoodsImg" id="searchImg">
+		<id property="id" column="giID" />
+		<result property="name" column="giName" />
+		<result property="sort" column="giSort" />
+	</resultMap>
+
+	<insert id="add">
+		INSERT into goodsImg(goodsID,name,sort)
+		values(#{goodsId},#{gImg.name},#{gImg.sort})
+	</insert>
+
+	<update id="update" parameterType="entity.GoodsImg">
+		update goods set name=
+		<if test="name != null and name != ''">#{name}</if>
+		,sort=
+		<if test="sort != null and sort != '' and sort != -1">#{sort}</if>
+		,goodsID=
+		<if test="goods != null and goods.id != null and goods.id != '' and goods.id != -1">#{goods.id}</if>
+		where id = #{id}
+	</update>
+
+	<update id="del">
+		delete from goodsImg where goodsID in(${_parameter})
+	</update>
+</mapper> 
+    
