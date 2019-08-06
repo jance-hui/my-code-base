@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC   
+    "-//mybatis.org//DTD Mapper 3.0//EN"  
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dao.OrderDetailsDao">
+	<insert id="add">
+	INSERT INTO orderdetails(goodsID,ordersID,price,number,money) VALUES(#{orderDetails.goods.id},#{id},#{orderDetails.price},#{orderDetails.number},#{orderDetails.money})
+	</insert>
+
+	<select id="searchByOID" resultMap="search">
+		SELECT od.*,g.`name` as gName
+		FROM orderdetails as od LEFT JOIN goods as g
+		on od.goodsID = g.id
+		where od.ordersID = #{id}
+	</select>
+
+	<resultMap type="entity.OrderDetails" id="search">
+		<id property="id" column="id" />
+		<result property="number" column="number" />
+		<result property="price" column="price" />
+		<result property="money" column="money" />
+		
+		<association property="goods" javaType="entity.Goods" column="goodsID">
+			<id property="id" column="goodsID" />
+			<result property="name" column="gName" />
+		</association>
+	</resultMap>
+</mapper>

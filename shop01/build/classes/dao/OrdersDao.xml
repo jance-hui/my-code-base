@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC   
+    "-//mybatis.org//DTD Mapper 3.0//EN"  
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dao.OrdersDao">
+	<insert id="add">
+		INSERT INTO orders(userID,orderNUM,positionID,total,timeType) VALUES(#{user.id},#{orderNUM},#{position.id},#{total},#{timeType})
+	</insert>
+	<select id="returnNewID" resultType="java.lang.Integer">
+		select last_insert_id()
+	</select>
+	
+	<select id="searchByID" resultMap="search">
+		
+	</select>
+	
+	<select id="searchByUID" resultMap="search">
+		SELECT o.*,p.position as pP,p.`name` as pN,p.phone as pH,pa.area as pAA,pc.city as pCC,pp.province as pPP 
+		from orders as o LEFT JOIN position as p
+		on o.positionID = p.id LEFT JOIN p_area as pa
+		on p.areaID = pa.areaID LEFT JOIN p_city as pc
+		on pa.father = pc.cityID LEFT JOIN p_province as pp
+		on pc.father = pp.provinceID
+		where o.userID = #{id}
+	</select>
+	
+	<resultMap type="entity.Orders" id="search">
+		<id property="id" column="id" />
+		<result property="orderNUM" column="orderNUM" />
+		<result property="total" column="total" />
+		<result property="timeType" column="timeType" />
+
+		<association property="position" javaType="position.Position" column="positionID">
+			<id property="id" column="positionID" />
+			<result property="position" column="pP" />
+			<result property="name" column="pN" />
+			<result property="phone" column="pH" />
+		
+			<association property="area" javaType="position.Area" column="pAA">
+				<result property="area" column="pAA" />
+				<association property="city" javaType="position.City" column="pCC">
+					<result property="city" column="pCC" />
+					<association property="province" javaType="position.Province" column="pPP">
+						<result property="province" column="pPP" />
+					</association>
+				</association>
+			</association>
+		</association>
+	</resultMap>
+</mapper>

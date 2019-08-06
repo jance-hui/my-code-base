@@ -1,0 +1,437 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+a {
+	text-decoration: none;
+	color: #666666;
+}
+
+a:hover {
+	color: #FF4400;
+	cursor: pointer;
+}
+
+#top {
+	width: 100%;
+	height: 36px;
+	background-color: #f5f5f5;
+	font-size: 12px;
+	color: #6c6c6c;
+}
+
+#top_right {
+	position: absolute;
+	right: 70px;
+}
+
+#top_left {
+	position: absolute;
+	left: 65px;
+}
+
+#top_left li:hover {
+	color: #FF4400;
+	cursor: pointer;
+}
+
+.topClass li {
+	list-style: none;
+	float: left;
+	padding-top: 8px;
+	margin-left: 20px;
+}
+
+.xinxi {
+	display: none;
+	background-color: #fff;
+}
+
+.xinxi ul {
+	width: 80px;
+	height: 200px;
+	position: absolute;
+}
+
+.xinxi ul li {
+	list-style: none;
+	float: left;
+	font-size: 13px;
+}
+
+.xinxi li:hover {
+	background-color: #999999;
+	color: #F22D00;
+}
+
+#header {
+	width: 100%;
+	height: 60px;
+	font-size: 12px;
+}
+
+#headers {
+	position: relative;
+	width: 1200px;
+	height: 60px;
+	left: 80px;
+	float: left;
+}
+
+#header_logo {
+	padding-top: 10px;
+	float: left;
+}
+
+#header_search {
+	padding-left: 100px;
+	width: 800px;
+	left: 150px;
+	padding-top: 10px;
+	float: left;
+}
+
+#header_search_form {
+	position: relative;
+	width: 700px;
+	float: left;
+}
+
+#search_btns {
+	float: left;
+}
+
+#search_box {
+	font-size: 14px;
+	height: 34px;
+	width: 600px;
+	margin-top:10px;
+	line-height: 20px;
+	border-style: solid;
+	border-color: #FF4200;
+	border-width: 2px;
+	text-indent: 15px;
+	outline: 0;
+	float: left;
+}
+
+#search_taoBao {
+	height: 34px;
+	width: 80px;
+	margin-top:10px;
+	color: #fff;
+	background-color: #FF2400;
+	border: 2px #FF4200;
+	font-size: 15px;
+	font-weight: bold;
+	cursor: pointer;
+}
+
+#search {
+	width: 100%;
+	height: 55px;
+}
+
+#searchs {
+	width: 940px;
+	position: relative;
+	left: 80px;
+}
+
+#searchs ul {
+	height: 42px;
+	width: 940px;
+	list-style: none;
+	border: 2px solid #FFf;
+	border-bottom-color: #FF5000;
+}
+
+#searchs li {
+	width: 100px;
+	height: 40px;
+	float: left;
+	text-align: center;
+	line-height: 40px;
+	cursor: pointer;
+}
+
+#searchs li:hover {
+	background-color: #FF5000;
+	color: #fff;
+}
+
+.search {
+	background-color: #FF5000;
+	color: #fff;
+	font-weight: bold;
+}
+
+#guanggao {
+	width: 100%;
+	height: 253px;
+}
+
+#guanggaos {
+	width: 1000px;
+	position: relative;
+	left: 80px;
+}
+
+#guanggaos img {
+	border: 2px solid #e8e8e8;
+}
+
+#specific {
+	width: 100%;
+	height: 281px;
+}
+
+#specifics {
+	width: 1000px;
+	position: relative;
+	left: 80px;
+}
+
+#specifics_top {
+	margin-top: 20px;
+	margin-left: 20px;
+}
+
+#specifics span {
+	margin-top: 5px;
+	font-size: 12px;
+	color: #999999;
+}
+
+#specifics .span_red {
+	color: red;
+}
+
+#specifics_message {
+	height: 81px;
+	margin-top: 10px;
+	border: 1px solid #E8E8E8;
+}
+
+#specifics_message ul {
+	list-style: none;
+}
+
+#specifics_message p ,#else_message p ,#else_message li{
+	width: 100px;
+	font-size: 12px;
+	color: #999999;
+	margin-left: 20px;
+	line-height: 40px;
+	float: left;
+}
+#specifics_message li {
+	height: 40px;
+	position:relative;
+	border-bottom: 1px dashed #E8E8E8;
+}
+.main_name{
+	width:100px;
+	height:40px;
+	position:relative;
+	float:left;
+}
+.main_classify {
+	width:800px;
+	position:relative;
+	float:left;
+}
+
+.main_classify ul ,#else_message ul ,#sort ul ,#goodss ul{
+	list-style: none;
+	float: left;
+}
+.main_classify li{
+	width:60px;
+}
+.main_classify li ,#sort1 li{
+	float: left;
+	margin-left: 10px;
+	margin-right: 40px;
+	font-size: 12px;
+	line-height: 40px;
+	cursor: pointer;
+}
+#else_message li{
+	float: left;
+	margin-left: 10px;
+	font-size: 12px;
+	line-height: 40px;
+	cursor: pointer;
+}
+.main_classify li:hover{
+	color: #FF4400;
+}
+#else_message li:hover{
+	color: #FF4400;
+}
+#else_message{
+	margin-top: 20px;
+	height: 40px;
+	border: 1px solid #E8E8E8;
+}
+#sort{
+	margin-top: 20px;
+	width:1000px;
+	height: 80px;
+	border: 1px solid #E8E8E8;
+	position:relative;
+}
+#sort1{
+	height: 40px;
+	background-color: #F5F5F5;
+	position:relative;
+}
+#sort1 ul{
+	height: 30px;
+}
+#sort1 li{
+	width: 65px;
+	height: 40px;
+	margin-left: 10px;
+	margin-right: 0;
+	text-align: center;
+	font-size: 13px;
+	position:relative;
+}
+.select{
+	background-color: #fff
+	color: #FF4400;
+	font-weight: bold;
+}
+#sort1 li:hover {
+	background-color: #fff;
+	color: #f40;
+}
+#sort2{
+	width:1000px;
+	height: 40px;
+	font-size: 12px;
+	line-height: 40px;
+	position:relative;
+}
+#sort2 input{
+	width: 50px;
+	margin-left:10px;
+	position:relative;
+}
+#goods {
+	width: 100%;
+	height: 360px;
+}
+#goodss{
+	width: 1200px;
+	position: relative;
+	left: 80px;
+}
+#goodss li{
+	width: 230px;
+	height: 300px;
+	position: relative;
+	float: left;
+	margin-right: 10px;
+	margin-top: 20px;
+	border: 1px solid #C9C9C9;
+}
+.goods_money{
+	height: 30px;
+	width: 230px;
+	top:5px;
+	position: relative;
+	float: left;
+}
+.money{
+	width:70px;
+	color: #FF4400;
+	font-size: 18px;
+	position: absolute;
+	left:2px;
+}
+.fukuan{
+	width:150px;
+	font-size: 12px;
+	margin-top: 3px;
+	color: #888;
+	position: absolute;
+	right:2px;
+}
+.goods_mes{
+	top:5px;
+	height: 30px;
+	font-size: 13px;
+	line-height: 20px;
+	cursor: pointer;
+	position: relative;
+	margin-left:5px;
+}
+.goods_mes:hover{
+	color: #f40;
+}
+.goods_shop{
+	margin-top: 50px;
+}
+.span1{
+	margin-left: 10px;
+	font-size: 12px;
+	color: #888;
+	float: left;
+}
+.span2{
+	margin-left: 120px;
+	float: right;
+	font-size: 12px;
+	color: #888;
+	float: left;
+}
+.bottom{
+	width: 100%;
+	height: 150px;
+	position: relative;
+}
+.bottoms{
+	top: 10px;
+	width: 1200px;
+	height: 150px;
+	margin-left: 60px;
+	position: relative;
+}
+#bottom1{
+	width: 1200px;
+	height: 40px;
+	border-top: 1px solid #C9C9C9;
+	border-bottom: 1px solid #C9C9C9;
+	line-height: 40px;
+}
+#bottom2{
+	width: 1200px;
+	height: 40px;
+	line-height: 40px;
+}
+#bottom2 li{
+	margin-left: 6px;
+	margin-right: 6px;
+}
+#changhao,#bottom3 li{
+	color: #9c9c9c;
+	font-size: 12px;
+}
+ul{
+	list-style: none;
+}
+.bottoms li{
+	float: left;
+	font-size: 12px;
+	color: #6c6c6c;
+	cursor: pointer;
+	margin-right: 10px;
+	margin-left: 10px;
+}
+.bottoms li:hover{
+	color: #f40;
+}

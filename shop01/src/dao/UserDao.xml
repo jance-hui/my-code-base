@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC   
+    "-//mybatis.org//DTD Mapper 3.0//EN"  
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dao.UserDao">
+	<select id="search" resultType="entity.User">select * from user</select>
+	
+	<select id="searchByName" resultType="entity.User">select * from user where username = #{username}</select>
+	
+	<select id="searchNew" resultType="java.lang.Integer">select * from user where username = #{username}</select>
+	
+	<select id="loginSearch" resultType="java.lang.String">select * from user where username = #{username} and password = #{password}</select>
+	
+	<insert id="add">INSERT into user(username,password,name,phone)values(#{username},#{password},#{name},#{phone})</insert>
+	<select id="returnNewId" resultType="java.lang.Integer">
+		select last_insert_id()
+	</select>
+	
+	<update id="update" parameterType="java.util.List">
+		update user set username=#{username},password = #{password},name=#{name},phone=#{phone},picture=#{picture}
+		where id = #{id}
+	</update>
+</mapper> 
+    

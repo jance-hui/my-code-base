@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC   
+    "-//mybatis.org//DTD Mapper 3.0//EN"  
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dao.BrandDao">
+	<select id="search" resultType="entity.Brand">select * from g_brand</select>
+	
+	<select id="search2" resultType="entity.Brand">select * from g_brand where id in(${_parameter})</select>
+	
+	<insert id="add">INSERT into g_brand(name)values(#{name})</insert>
+	
+	<update id="del">delete from g_brand where id in(${_parameter})</update>
+	
+	<update id="update" parameterType="java.util.List">update g_brand set name=<foreach collection="list" item="item" index="index"  separator=" " open="case id" close="end">
+			when #{item.id} then #{item.name}
+		</foreach>
+		where id in
+		<foreach collection="list" index="index" item="item" separator="," open="(" close=")">
+			#{item.id}
+		</foreach>  
+	</update>
+</mapper> 
+    

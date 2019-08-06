@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC   
+    "-//mybatis.org//DTD Mapper 3.0//EN"  
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dao.PositionDao">
+	<select id="searchPro" resultType="position.Province">select * from p_province</select>
+	
+	<select id="searchCity" resultType="position.City">select * from p_city where father =#{p_id}</select>
+	
+	<select id="searchArea" resultType="position.Area">select * from p_area where father =#{c_id}</select>
+	
+	<insert id="add">
+		insert into `position`(userID,position,areaID,name,phone)VALUES(#{user.id},#{position},#{area.areaID},#{name},#{phone})
+	</insert>
+	<select id="returnNewID" resultType="java.lang.Integer">
+		select last_insert_id()
+	</select>
+	
+	<select id="searchPosition" resultMap="searchPos">
+		SELECT p.*,pa.id as paid,pa.areaID as paID, pa.area as paName ,pc.id as pcid,pc.cityID as pcID, pc.city as pcName,pp.id as ppid,pp.provinceID as ppID,pp.province as ppName
+		from position as p LEFT JOIN `user` as u
+		on p.userID = u.id LEFT JOIN p_area as pa
+		on p.areaID = pa.areaID LEFT JOIN p_city as pc
+		on pa.father = pc.cityID LEFT JOIN p_province as pp
+		on pc.father = pp.provinceID 
+		where userID = #{id}
+	</select>
+	
+	<select id="searchByID" resultMap="searchPos">
+		SELECT p.*,pa.id as paid,pa.areaID as paID, pa.area as paName ,pc.id as pcid,pc.cityID as pcID, pc.city as pcName,pp.id as ppid,pp.provinceID as ppID,pp.province as ppName
+		from position as p LEFT JOIN `user` as u
+		on p.userID = u.id LEFT JOIN p_area as pa
+		on p.areaID = pa.areaID LEFT JOIN p_city as pc
+		on pa.father = pc.cityID LEFT JOIN p_province as pp
+		on pc.father = pp.provinceID 
+		where p.id = #{id}
+	</select>
+	<resultMap type="position.Position" id="searchPos">
+		<id property="id" column="id" />
+		<result property="position" column="position" />
+		<result property="name" column="name" />
+		<result property="phone" column="phone" />
+		
+		<association property="user" javaType="entity.User" column="userID">
+			<id property="id" column="userID" />
+		</association>
+		
+		<association property="area" javaType="position.Area" column="paid">
+			<id property="id" column="paid" />
+			<result property="areaID" column="paID" />
+			<result property="area" column="paName" />
+			<association property="city" javaType="position.City" column="pcid">
+				<id property="id" column="pcid" />
+				<result property="cityID" column="pcID" />
+				<result property="city" column="pcName" />
+				<association property="province" javaType="position.Province" column="ppid">
+					<id property="id" column="ppid" />
+					<result property="provinceID" column="ppID" />
+					<result property="province" column="ppName" />
+				</association>
+			</association>
+		</association>
+	</resultMap>
+</mapper> 
+    
