@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC   
+    "-//mybatis.org//DTD Mapper 3.0//EN"  
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dao.ScoreDao">
+	<select id="search" resultMap="searchScMap">
+		SELECT sc.*,concat(e_id,p_id) as ep from v_emp_sc as sc where sc.s_id = #{id}
+	</select>
+	<select id="searchByCondition" resultMap="searchScMap">
+		SELECT sc.*,concat(e_id,p_id) as ep from v_emp_sc as sc where 1=1
+		<if
+			test="sc.emp != null and sc.emp.name != null and sc.emp.name != ''"> and sc.e_name=#{sc.emp.name}</if>
+		<if
+			test="sc.emp != null and sc.emp.dep != null and sc.emp.dep.id != -1"> and sc.p_id=#{sc.emp.dep.id}</if>
+		<if test="sc.pro != null and sc.pro.id != -1"> and sc.p_id=#{sc.pro.id}</if>
+		<if test="sc.grade != null and sc.grade != ''"> and sc.grade=#{sc.grade}</if>
+		LIMIT #{begin} ,#{end}
+	</select>
+
+	<resultMap id="searchScMap" type="sc">
+		<id property="tId" column="ep" />
+		<result property="id" column="s_id" />
+		<result property="value" column="value" />
+		<result property="grade" column="grade" />
+
+		<association property="emp" javaType="emp" column="e_id">
+			<id property="id" column="e_id" />
+			<result property="name" column="e_name" />
+			<association property="dep" javaType="dep" column="d_id">
+				<id property="id" column="d_id" />
+				<result property="name" column="d_name" />
+			</association>
+		</association>
+
+		<association property="pro" javaType="pro" column="p_id">
+			<id property="id" column="p_id" />
+			<result property="name" column="p_name" />
+		</association>
+	</resultMap>
+	
+	<insert id="add">
+		insert into score(e_id,p_id,value) values(#{emp.id},#{pro.id},#{value})
+	</insert>
+	<select id="returnNewId" resultType="java.lang.Integer">
+		select last_insert_id()
+	</select>
+	
+	<update id="update">
+		update score set value = #{value} where id = #{id}
+	</update>
+	
+	<select id="searchCount" resultType="java.lang.Integer">
+		SELECT count(*) from v_emp_sc where 1=1
+		<if test="emp != null and emp.name != null and emp.name != ''"> and e_name like '%${emp.name}%'</if>
+		<if test="emp != null and emp.dep != null and emp.dep.id != -1"> and p_id=#{emp.dep.id}</if>
+		<if test="pro != null and pro.id != -1"> and p_id=#{pro.id}</if>
+		<if test="grade != null and grade != ''"> and grade=#{grade}</if>
+	</select>
+
+
+	
+</mapper> 
+    
