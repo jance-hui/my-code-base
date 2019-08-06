@@ -1,0 +1,137 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+a {
+	text-decoration: none;
+	color: #666666;
+}
+
+a:hover {
+	color: #FF4400;
+	cursor: pointer;
+}
+.top{
+	width: 100%;
+	height: 90px;
+}
+.tops{
+	width: 1200px;
+	position: relative;
+	top: 25px;
+	left: 75px;
+}
+#top_message{
+	float: right;
+	margin-right: 60px;
+	width: 950px;
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+	font-size: 12px;
+	background-color: #fef2f2;
+	border: 1px solid #ffb4a8;
+	color: #6C6C6C;
+}
+.load{
+	width: 100%;
+	height: 600px;
+	background-image: url(../img/load_bg1.jpg)
+}
+.loads{
+	position: absolute;
+    top: 230px;
+    right: 135px;
+    width: 350px;
+    height: 340px;
+    background-color: rgba(255,255,255,.9);
+}
+.loads div{
+	margin-left: 26px;
+	margin-top: 25px;
+	width: 350px;
+	height: 35px;
+}
+ul{
+	list-style: none;
+}
+li{
+	float: left;
+	font-size: 12px;
+	color: #6c6c6c;
+	cursor: pointer;
+	margin-right: 10px;
+	margin-left: 10px;
+}
+li:hover{
+	color: #f40;
+}
+#text{
+	margin-top: 30px;
+    line-height: 18px;
+    font-size: 16px;
+    color: #3c3c3c;
+    font-weight: 700;
+}
+#name,#passwd{
+	text-indent: 15px;
+	font-size: 14px;
+	width: 298px;
+	height: 35px;
+}
+#btn{
+	width: 300px;
+    height: 42px;
+    border: 0;
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: middle;
+    line-height: 42px;
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
+    background: #f40;
+    border-radius: 3px;
+    cursor: pointer;
+    zoom: 1;
+}
+#other{
+	width: 300px;
+	height: 40px;
+	position: absolute;
+	float: right;
+	right: -60px;
+	margin-top: -5px;
+	
+}
+.bottom{
+	width: 100%;
+	height: 150px;
+}
+.bottoms{
+	top: 50px;
+	width: 1200px;
+	height: 150px;
+	margin-left: 60px;
+	position: relative;
+}
+#bottom1{
+	width: 1200px;
+	height: 40px;
+	border-top: 1px solid #C9C9C9;
+	border-bottom: 1px solid #C9C9C9;
+	line-height: 40px;
+}
+#bottom2{
+	width: 1200px;
+	height: 40px;
+	line-height: 40px;
+}
+#bottom2 li{
+	margin-left: 6px;
+	margin-right: 6px;
+}
+#changhao,#bottom3 li{
+	color: #9c9c9c;
+	font-size: 12px;
+}

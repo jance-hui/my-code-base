@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC   
+    "-//mybatis.org//DTD Mapper 3.0//EN"  
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dao.GoodsDao">
+	<select id="searchCountByGoods" resultType="java.lang.Integer">
+		select count(*) from goods where 1=1
+		<if test="name != null and name != ''">and name like '%${name}%'</if>
+		<if test="details != null and details != ''">and details like '%${details}%'</if>
+		<if
+			test="brand != null and brand.id != null and brand.id != '' and brand.id != -1">and brandID=#{brand.id}</if>
+		<if
+			test="genre != null and genre.id != null and genre.id != '' and genre.id != -1">and genreID=#{genre.id}</if>
+	</select>
+	
+	<select id="search" resultMap="searchGoods">
+		select g.*,gb.name as
+		gbName,gg.name as ggName from goods as g LEFT JOIN g_brand as gb
+		on g.brandID = gb.id LEFT JOIN g_genre as gg
+		on g.genreID = gg.id
+	</select>
+	
+	<select id="searchById" resultMap="searchGoods">
+		select g.*,gb.name as
+		gbName,gg.name as ggName from goods as g LEFT JOIN g_brand as gb
+		on g.brandID = gb.id LEFT JOIN g_genre as gg
+		on g.genreID = gg.id where g.id=#{id}
+	</select>
+	
+	<select id="searchByIds" resultMap="searchGoods">
+		select g.*,gb.name as
+		gbName,gg.name as ggName from goods as g LEFT JOIN g_brand as gb
+		on g.brandID = gb.id LEFT JOIN g_genre as gg
+		on g.genreID = gg.id where g.id in(${_parameter})
+	</select>
+
+	<select id="searchByGoods" resultMap="searchGoods">
+		select g.*,gb.name as gbName,gg.name as ggName from goods as g LEFT
+		JOIN g_brand as gb
+		on g.brandID = gb.id LEFT JOIN g_genre as gg
+		on g.genreID = gg.id where 1=1
+		<if test="goods.name != null and goods.name != ''">and g.name like '%${goods.name}%'</if>
+		<if test="goods.details != null and goods.details != ''">and g.details like '%${goods.details}%'</if>
+		<if
+			test="goods.brand != null and goods.brand.id != null and goods.brand.id != '' and goods.brand.id != -1">and g.brandID=#{goods.brand.id}</if>
+		<if
+			test="goods.genre != null and goods.genre.id != null and goods.genre.id != '' and goods.genre.id != -1">and g.genreID=#{goods.genre.id}</if>
+		limit #{begin},#{end}
+	</select>
+	
+	<select id="searchAll" resultType="java.lang.Integer">
+		select count(*) from goods 
+	</select>
+
+	<resultMap type="entity.Goods" id="searchGoods">
+		<id property="id" column="id" />
+		<result property="name" column="name" />
+		<result property="price" column="price" />
+		<result property="details" column="details" />
+		<result property="stock" column="stock" />
+		<result property="salesVolume" column="salesVolume" />
+
+		<association property="brand" javaType="entity.Brand"
+			column="brandID">
+			<id property="id" column="brandID" />
+			<result property="name" column="gbName" />
+		</association>
+
+		<association property="genre" javaType="entity.Genre"
+			column="genreID">
+			<id property="id" column="genreID" />
+			<result property="name" column="ggName" />
+		</association>
+	</resultMap>
+
+	<insert id="add">
+		INSERT into
+		goods(name,price,details,brandID,genreID,stock,salesVolume)
+		values(#{name},#{price},#{details},#{brand.id},#{genre.id},#{stock},#{salesVolume})
+	</insert>
+
+
+	<update id="update" parameterType="entity.Goods">
+		update goods set name=
+		<if test="name != null and name != ''">#{name}</if>
+		,price=
+		<if test="price != null and price != '' and price != -1">#{price}</if>
+		,details=
+		<if test="details != null and details != ''">#{details}</if>
+		,brandID=
+		<if test="brand != null and brand.id != null and brand.id != '' and brand.id != -1">#{brand.id}</if>
+		,genreID=
+		<if test="genre != null and genre.id != null and genre.id != '' and genre.id != -1">#{genre.id}</if>
+		,stock=
+		<if test="stock != null and stock != '' and stock != -1">#{stock}</if>
+		,salesVolume=
+		<if test="salesVoulnme != null and salesVoulnme != '' and salesVoulnme != -1">#{salesVolume}</if>
+		where id = #{id}
+	</update>
+
+
+	<update id="del">
+		delete from goods where id in(${_parameter})
+	</update>
+	
+	<update id="amendNum">
+		update goods set stock=(stock-#{num}),salesVolume=(salesVolume+#{num}) where id = #{id}
+	</update>
+</mapper>

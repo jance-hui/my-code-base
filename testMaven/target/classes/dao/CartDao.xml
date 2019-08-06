@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC   
+    "-//mybatis.org//DTD Mapper 3.0//EN"  
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dao.CartDao">
+		
+	<insert id="add">INSERT into cart(userID)values(#{user.id})</insert>
+	<select id="returnNewID" resultType="java.lang.Integer">
+		select last_insert_id()
+	</select>
+	
+	<update id="del">delete from cart where id =#{id}</update>
+	
+	<select id="searchCart" resultMap="searchCart">
+		select * from cart where id=#{id}
+	</select>
+	
+	<select id="searchByUID" resultMap="searchCart">
+		select * from cart where userID=#{id}
+	</select>
+	
+	<resultMap type="entity.Cart" id="searchCart">
+		<id property="id" column="id" />
+		<result property="total" column="total" />
+		
+		<association property="user" javaType="entity.User" column="userID">
+			<id property="id" column="userID" />
+		</association>
+	</resultMap>
+	
+	<select id="search" resultMap="searchCartDetails">
+		select * from cartDetails as c LEFT JOIN goods as g
+		on c.goodsID = g.id where cartID=#{id}
+	</select>
+	
+	<resultMap type="entity.CartDetails" id="searchCartDetails">
+		<id property="id" column="id" />
+		<result property="goodsNUM" column="goodsNUM" />
+		<result property="money" column="money" />
+
+		<association property="goods" javaType="entity.Goods" column="goodsID">
+			<id property="id" column="goodsID" />
+			<result property="name" column="name" />
+			<result property="price" column="price" />
+			<result property="details" column="details" />
+			<result property="stock" column="stock" />
+		</association>
+	</resultMap>
+</mapper>

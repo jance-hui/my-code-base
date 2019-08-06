@@ -1,0 +1,295 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+a {
+	text-decoration: none;
+	color: #666666;
+}
+
+a:hover {
+	color: #FF4400;
+	cursor: pointer;
+}
+
+#top {
+	width: 100%;
+	height: 35px;
+	background-color: #f5f5f5;
+	font-size: 12px;
+	color: #666666;
+	position: relative;
+}
+
+#top_right {
+	position: absolute;
+	right: 70px;
+}
+
+#top_left {
+	position: absolute;
+	left: 50px;
+}
+
+#top_left li:hover {
+	color: #FF4400;
+	cursor: pointer;
+}
+
+.topClass li {
+	list-style: none;
+	float: left;
+	padding-top: 8px;
+	margin-left: 20px;
+}
+
+#header {
+	width: 100%;
+	height: 80px;
+	font-size: 12px;
+}
+
+#headers {
+	position: relative;
+	width: 1000px;
+	height: 60px;
+	margin-top:10px;
+	left: 170px;
+	float: left;
+}
+
+#header_logo {
+	padding-top: 10px;
+	float: left;
+}
+
+#header_text {
+	font-size: 23px;
+	width: 120px;
+	font-weight: bold;
+	margin-left: 5px;
+	margin-top: 15px;
+	color: #6C6C6C;
+	float: left;
+}
+
+#header_search {
+	width: 500px;
+	left: 280px;
+	padding-left: 200px;
+	padding-top: 10px;
+	float: left;
+}
+
+#header_search_form {
+	position: relative;
+	width: 700px;
+	float: left;
+}
+
+#search_btns {
+	float: left;
+}
+
+#search_box {
+	font-size: 14px;
+	height: 36px;
+	width: 400px;
+	line-height: 20px;
+	border-style: solid;
+	border-color: #FF4200;
+	border-width: 3px;
+	text-indent: 15px;
+	outline: 0;
+	float: left;
+}
+
+#search_taoBao {
+	height: 36px;
+	width: 80px;
+	color: #fff;
+	background-color: #FF2400;
+	border: 3px #FF4200;
+	font-size: 15px;
+	font-weight: bold;
+	cursor: pointer;
+}
+.order{
+	width:100%;
+	background:#f2f2f2;
+}
+.orders{
+	margin-left:5%;
+	width:90%;
+	background:#f8f8f8;
+	position:relative;
+}
+.ordersTop{
+	width:100%;
+	height:50px;
+	background:#ea4949;
+	position:relative;
+}
+#text{
+	font-weight: 100;
+	line-height:50px;
+	font-size:16px;
+	color:#fff;
+	margin-left:40px;
+	position:relative;
+	float:left;
+}
+#search{
+	font-size:16px;
+	color:#fff;
+	margin-right:50px;
+	position:relative;
+	float:right;
+}
+#search input{
+	margin-top:12px;
+	width: 220px;
+    height: 26px;
+    line-height: 26px;
+    border: none;
+    border-radius: 3px;
+}
+#search button{
+	width: 80px;
+    height: 26px;
+    line-height: 26px;
+    padding-left: 7px;
+    border: none;    
+    color: #fff;
+	background:#ea4949;
+}
+.ordersMesTop{
+	margin-top:20px;
+	width:100%;
+	height:40px;
+}
+.ordersMesTop ul{
+	list-style: none;
+}
+.ordersMesTop li{
+	float:left;
+	width:120px;
+	text-align: center;
+	color: #a3a3a3;
+	height: 40px;
+	font-size:13px;
+    line-height: 40px;
+}
+#ordersMes{
+	width:600px;
+}
+.myOrder{
+	width:100%;
+	border: 1px solid #e0e0e0;
+}
+.myOrderTop{
+	height:30px;
+	width:100%;
+}
+.myOrderTop div{
+	float:left;
+	font-size:13px;
+	line-height:30px;
+}
+.myOrderNUM ,.myOrderTimeText{
+	margin-left:25px;
+	color:#a3a3a3;
+}
+.myOrderTime{
+	margin-left:25px;
+	color:#333333;
+}
+.myOrderDetails{
+	width:100%;
+	height:150px;
+	border-bottom: 1px solid #e0e0e0;
+}
+.myOrderDetails ul{
+	list-style: none;
+}
+
+.myOrderDetails li{
+	float:left;
+	width:120px;
+	height:120px;
+	text-align: center;
+	color: #a3a3a3;
+	font-size:13px;
+	border-right: 1px solid #e0e0e0;
+}
+.myOrderDetails .myOrderDetailsMes{
+	width:600px;
+}
+.goodsMes{
+	width:600px;
+	height:60px;
+	position:relative;
+}
+.goodsMes img{
+	float:left;
+}
+.goodsName{
+	height:30px;
+	font-size:12px;
+	line-height:30px;
+	color:#666;
+}
+.goodsNum{
+	height:30px;
+	font-size:12px;
+	line-height:30px;
+	color:#a3a3a3;
+}
+
+.bottom{
+	margin-top:20px;
+	width: 100%;
+	height: 150px;
+	float: left;
+}
+.bottoms{
+	width: 1200px;
+	margin-left: 100px;
+}
+.bottoms ul{
+	list-style: none;
+}
+#bottom1{
+	height: 40px;
+	border-top: 1px solid #C9C9C9;
+	border-bottom: 1px solid #C9C9C9;
+}
+#bottom1 li ,#bottom2 li{
+	float: left;
+	font-size: 12px;
+	margin-left: 10px;
+	margin-right: 10px;
+	color: #6c6c6c;
+	line-height: 40px;
+	cursor: pointer;
+}
+#bottom2 li{
+	margin-left: 5px;
+	margin-right: 5px;
+}
+#bottom1 li:hover,#bottom2 li:hover{
+	color: #f40;
+}
+#bottom2{
+	height: 40px;
+}
+#bottom3{
+	height: 40px;
+}
+#bottom3 li ,#changhao{
+	line-height: 40px;
+	float: left;
+	color: #9c9c9c;
+	font-size: 12px;
+}

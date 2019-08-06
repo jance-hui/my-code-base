@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC   
+    "-//mybatis.org//DTD Mapper 3.0//EN"  
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dao.CartDetailsDao">
+		
+	<insert id="add">INSERT into cartDetails(cartID,goodsID,goodsNUM)values(#{cart.id},#{goods.id},#{goodsNUM})</insert>
+	
+	<update id="del">delete from cartDetails where cartID = #{cart.id} 
+	<if test="goods != null">and goodsID = #{goods.id}</if>
+	</update>
+	
+	<update id="update">
+		update cartDetails set goodsNUM = #{goodsNUM}
+		where cartID = #{cart.id} and goodsID = #{goods.id}
+	</update>
+	
+	<select id="searchNUM" resultType="java.lang.String">
+		select goodsNUM from cartDetails where cartID = #{cart.id} and goodsID = #{goods.id}
+	</select>
+</mapper>
