@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC   
+    "-//mybatis.org//DTD Mapper 3.0//EN"  
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dao.EmployeeDao">
+	<select id="searchEmp" resultMap="searchEmpMap">
+		select e.*,d.name as
+		d_name,d.emp_count as d_emp_count from employee as e left join
+		department
+		as d on e.d_id = d.id where e.id = #{id}
+	</select>
+	<resultMap id="searchEmpMap" type="entity.Employee">
+		<id property="id" column="id" />
+		<result property="name" column="name" />
+		<result property="sex" column="sex" />
+		<result property="age" column="age" />
+		<result property="img" column="img" />
+		<collection property="dep"  ofType="entity.Department" javaType="entity.Department"  column="d_id" select="selectDep"/>
+	</resultMap>
+	
+	<select id="selectDep" resultType="entity.Department">
+		select * from department where id =#{id}
+	</select>
+	
+	<select id="searchBatch" resultMap="searchEmpMap">
+		select e.*,d.name as
+		d_name,d.emp_count as d_emp_count from employee as e left join
+		department
+		as d on e.d_id=d.id where e.id in(${_parameter})
+	</select>
+	
+	<insert id="add">
+		insert into employee(name,sex,age,img,d_id)values(#{name},#{sex},#{age},#{img},#{dep.id})
+	</insert>
+	
+	<update id="update">
+		update employee set name=#{name},sex=#{sex},age=#{age},d_id=#{dep.id},img=#{img} where id=#{id}
+	</update>
+	
+	<update id="updateBatch" parameterType="java.util.List">
+		update employee set name=
+		<foreach collection="list" item="item" index="index"  separator=" " open="case id" close="end">
+			when #{item.id} then #{item.name}
+		</foreach>
+		,sex=
+		<foreach collection="list" item="item" index="index"  separator=" " open="case id" close="end">
+			when #{item.id} then #{item.sex}
+		</foreach>
+		,age=
+		<foreach collection="list" item="item" index="index"  separator=" " open="case id" close="end">
+			when #{item.id} then #{item.age}
+		</foreach>
+		,d_id=
+		<foreach collection="list" item="item" index="index"  separator=" " open="case id" close="end">
+			when #{item.id} then #{item.dep.id}
+		</foreach>
+		,img=
+		<foreach collection="list" item="item" index="index"  separator=" " open="case id" close="end">
+			when #{item.id} then #{item.img}
+		</foreach>
+		where id in
+		<foreach collection="list" index="index" item="item" separator="," open="(" close=")">
+			#{item.id}
+		</foreach>
+       
+	</update>
+
+	<update id="del">
+		delete from employee where id=#{id}
+	</update>
+	
+	<update id="delBatch">
+		delete from employee where id in(${_parameter})
+	</update>
+	
+	<select id="searchCountByEmp" resultType="java.lang.Integer">
+		select count(*) from employee where 1=1
+		<if test="name != null and name != ''"> and name like '%${name}%'</if>
+		<if test="sex != null and sex != ''"> and sex=#{sex}</if>
+		<if test="age != null and age != 0"> and age=#{age}</if>
+		<if test="dep != null and dep.id != 0"> and d_id=#{dep.id}</if>
+	</select>
+	
+	<select id="searchByEmp" resultMap="searchEmpMap">
+		select e.*,d.name as
+		d_name,d.emp_count as d_emp_count from employee as e left join
+		department
+		as d on e.d_id = d.id where 1=1
+		<if test="emp.name != null and emp.name != ''"> and e.name like '%${emp.name}%'</if>
+		<if test="emp.sex != null and emp.sex != ''"> and e.sex=#{emp.sex}</if>
+		<if test="emp.age != null and emp.age != 0"> and e.age=#{emp.age}</if>
+		<if test="emp.dep != null and emp.dep.id != 0"> and e.d_id=#{emp.dep.id}</if>
+		LIMIT #{begin} ,#{end}
+	</select>
+	
+</mapper> 
+    

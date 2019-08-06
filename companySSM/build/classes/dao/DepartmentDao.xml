@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC   
+    "-//mybatis.org//DTD Mapper 3.0//EN"  
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="dao.DepartmentDao">
+	<select id="search" resultType="entity.Department">
+		select * from department
+	</select>
+	
+	<select id="search2" resultType="entity.Department">
+		select * from department where id in(${_parameter})
+	</select>
+	
+	<insert id="add">
+		insert into department(name,emp_count)values(#{name},0)
+	</insert>
+	
+	<update id="update">
+		update department set name=#{name} where id=#{id}
+	</update>
+	
+	<update id="updateBatch" parameterType="java.util.List">
+		update department set name=
+		<foreach collection="list" item="item" index="index"  separator=" " open="case id" close="end">
+			when #{item.id} then #{item.name}
+		</foreach>
+		where id in
+		<foreach collection="list" index="index" item="item" separator="," open="(" close=")">
+			#{item.id}
+		</foreach>  
+	</update>
+
+	<update id="setEmpDid">
+		update employee set d_id = null where d_id in(${_parameter})
+	</update>
+	<update id="del">
+		delete from department where id in(${_parameter})
+	</update>
+	
+	<select id="searchCountByDep" resultType="java.lang.Integer">
+		select count(*) from department where 1=1
+		<if test="name != null and name != ''"> and name=#{name}</if>
+		<if test="emp_count != null and emp_count != -1"> and emp_count=#{emp_count}</if>
+	</select>
+	
+	<select id="searchByDep" resultType="entity.Department">
+		select * from department where 1=1
+		<if test="dep.name != null and dep.name != ''"> and name=#{dep.name}</if>
+		<if test="dep.emp_count != null and dep.emp_count != -1"> and emp_count=#{dep.emp_count}</if>
+		LIMIT #{begin} ,#{end}
+	</select>
+	
+	<select id="searchDep" resultType="entity.Department">
+		select * from department where name=#{name}
+	</select>
+	
+</mapper> 
+    
